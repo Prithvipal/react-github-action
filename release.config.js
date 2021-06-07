@@ -1,5 +1,5 @@
 module.exports = {
-    branches: "master",
+    branches: "main",
     repositoryUrl: "https://github.com/Prithvipal/react-github-action",
     plugins: [
         '@semantic-release/commit-analyzer', 
