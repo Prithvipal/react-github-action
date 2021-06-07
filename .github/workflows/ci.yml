@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Cache node_module
@@ -54,8 +57,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy on stage
-        if: github.event_name == 'push'
-        run: npx surge --project ./build --domain http://separate-tax.surge.sh/
-        env:
-          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+        if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        run: npx surge --project ./build --domain http://separate-tax.surge.sh/ 
+      - name: Deploy on Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: npx surge --project ./build --domain http://didactic-bucket.surge.sh/
