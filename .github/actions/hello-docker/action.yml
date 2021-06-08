@@ -18,5 +18,5 @@ runs:
   image: "Dockerfile" # we can pass dockerhub image as well
   # entrypoint:
   args: 
-    - ${{ inputs.who-to-gree }}
+    - ${{ inputs.who-to-greet }}
 
