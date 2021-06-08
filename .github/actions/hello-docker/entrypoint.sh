@@ -17,5 +17,5 @@ echo "some stuff2"
 echo "some stuff3"
 echo "::endgroup::"
 
-echo "::set-env name=HOLA::Hey-Hello"
+echo '::set-env name=HOLA::Hey-Hello'
 
