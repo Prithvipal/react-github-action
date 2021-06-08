@@ -24,6 +24,8 @@ jobs:
           echo $HELLO
       - uses: ./.github/actions/hello-docker
         id: hello-docker
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
            who-to-greet: "Prithvipal"
       - run: |
