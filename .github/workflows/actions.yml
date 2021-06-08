@@ -9,5 +9,7 @@ jobs:
         id: hello
         with:
           who-to-greet: "Prithvi"
-      - run: echo "Time ${{ steps.hello.outputs.time }}"
+      - run: |
+          echo "Time ${{ steps.hello.outputs.time }}"
+          echo $HELLO
 

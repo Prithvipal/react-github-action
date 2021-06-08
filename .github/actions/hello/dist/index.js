@@ -634,6 +634,8 @@ try{
     core.startGroup("Logging github object")
     console.log(JSON.stringify(github, null, '\t'))
     core.endGroup()
+
+    core.exportVariable("HELLO", "hhelloo")
 }catch(error){
     core.setFailed(error.message)
 }
