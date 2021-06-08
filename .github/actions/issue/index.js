@@ -2,29 +2,29 @@ const core = require('@actions/core')
 const github = require('@actions/github')
 
 
-try {
-    const token = core.getInput("token")
-    const title = core.getInput("title")
-    const body = core.getInput("body")
-    const assignees = core.getInput("assignees")
+run()
 
-    const octokit = github.getOctokit(token)
+async function run() {
+    try {
+        const token = core.getInput("token")
+        const title = core.getInput("title")
+        const body = core.getInput("body")
+        const assignees = core.getInput("assignees")
 
-    const context = github.context;
+        const octokit = github.getOctokit(token)
 
-    const response = octokit.issues.create({
-        // owner: github.context.repo.owner,
-        // repo: github.context.repo.repo,
-        ...context.repo,
-        title,
-        body,
-        assignees: assignees ? assignees.split("\n") : undefined
-    })
+        // const context = github.context;
+        const response = await octokit.issues.create({
+            // owner: github.context.repo.owner,
+            // repo: github.context.repo.repo,
+            ...github.context.repo,
+            title,
+            body,
+            assignees: assignees ? assignees.split("\n") : undefined
+        })
 
-    core.setOutput("issue", JSON.stringify(response.data))
-} catch (error) {
-    core.setFailed(error.message)
-}
-
-function createIssue(){
+        core.setOutput("issue", JSON.stringify(response.data))
+    } catch (error) {
+        core.setFailed(error.message)
+    }
 }
