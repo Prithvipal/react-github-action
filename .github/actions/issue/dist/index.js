@@ -3620,36 +3620,37 @@ exports.getState = getState;
 /***/ 482:
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
-const core = __webpack_require__(470)
-const github = __webpack_require__(469)
+const core = __webpack_require__(470);
+const github = __webpack_require__(469);
 
 
-run()
+async function run(){
+    try{
+    
+        const token = core.getInput('token');
+        const title = core.getInput('title');
+        const body = core.getInput('body');
+        const assignees = core.getInput('assignees');
 
-async function run() {
-    try {
-        const token = core.getInput("token")
-        const title = core.getInput("title")
-        const body = core.getInput("body")
-        const assignees = core.getInput("assignees")
+        const octokit = github.getOctokit(token);
 
-        const octokit = github.getOctokit(token)
-
-        // const context = github.context;
         const response = await octokit.issues.create({
-            // owner: github.context.repo.owner,
-            // repo: github.context.repo.repo,
+            //owner: github.context.repo.owner,
+            //repo: github.context.repo.repo,
             ...github.context.repo,
             title,
             body,
-            assignees: assignees ? assignees.split("\n") : undefined
-        })
+            assignees: assignees ? assignees.split('\n') : undefined
+        });
 
-        core.setOutput("issue", JSON.stringify(response.data))
-    } catch (error) {
-        core.setFailed(error.message)
+        core.setOutput('issue', JSON.stringify(response.data));
+
+    }catch(error){
+        core.setFailed(error.message);
     }
 }
+
+run();
 
 /***/ }),
 
