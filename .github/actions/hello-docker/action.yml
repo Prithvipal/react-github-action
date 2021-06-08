@@ -1,0 +1,22 @@
+name: Hello World
+
+author: Prithvipal Singh
+
+description: Some description
+
+inputs:
+  who-to-greet:
+    description: "Who to greet"
+    required: true
+    default: Prithvi
+
+outputs:
+  time: 
+    description: 'The greeting time'
+runs:
+  using: "docker"
+  image: "Dockerfile" # we can pass dockerhub image as well
+  # entrypoint:
+  args: 
+    - ${{ inputs.who-to-gree }}
+
