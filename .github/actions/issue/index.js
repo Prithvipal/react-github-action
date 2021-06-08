@@ -10,9 +10,12 @@ try {
 
     const octokit = github.getOctokit(token)
 
+    const context = github.context;
+
     const response = octokit.issues.create({
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
+        // owner: github.context.repo.owner,
+        // repo: github.context.repo.repo,
+        ...context.repo,
         title,
         body,
         assignees: assignees ? assignees.split("\n") : undefined
@@ -21,4 +24,7 @@ try {
     core.setOutput("issue", JSON.stringify(response.data))
 } catch (error) {
     core.setFailed(error.message)
+}
+
+function createIssue(){
 }
