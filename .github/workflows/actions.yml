@@ -27,8 +27,7 @@ jobs:
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
-           who-to-greet: "Prithvipal"
+          who-to-greet: "Prithvipal"
       - run: |
           echo "Time ${{ steps.hello-docker.outputs.time }}"
           echo $HOLA
-

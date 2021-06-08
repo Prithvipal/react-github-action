@@ -11,12 +11,11 @@ inputs:
     default: Prithvi
 
 outputs:
-  time: 
-    description: 'The greeting time'
+  time:
+    description: "The greeting time"
 runs:
   using: "docker"
   image: "Dockerfile" # we can pass dockerhub image as well
   # entrypoint:
-  args: 
+  args:
     - ${{ inputs.who-to-greet }}
-
